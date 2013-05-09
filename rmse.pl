@@ -4,16 +4,19 @@ use strict;
 use warnings;
 my $numValues = 0;
 my $sumSquaredValues = 0;
+# added rather than using __DATA__ at the end of the file
 open(DATA, "<training/output");
 while (<DATA>) {
     my ($new_movie,$new_mean,$new_sd,$prediction,
 	$movie,$mean, $sd,$old_rating,$rating,$customer_id) = split(/\,/);
+    # added to check lower and upper bounds
     if($prediction < 1){
 	$prediction = 1;
     }
     if($prediction > 5){
 	$prediction = 5;
     }
+    # end added
     my $delta = $rating - $prediction;
     $numValues++;
     $sumSquaredValues += $delta*$delta;
